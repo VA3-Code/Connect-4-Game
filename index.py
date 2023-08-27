@@ -9,7 +9,7 @@ screen = pygame.display.set_mode((960, 540), pygame.RESIZABLE)
 
 pygame.display.set_caption("Connect 4 - Game developed by Mohit and Vinayak")
 
-pygame.display.set_icon(pygame.display.load("assets/icon.png"))
+pygame.display.set_icon(pygame.icon.load("assets/icon.png"))
 
 # Game Loop
 running = True
