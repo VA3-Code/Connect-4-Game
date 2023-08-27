@@ -27,15 +27,15 @@
 
 #### Theme Dark
 
-- Connect 4 Grid - dark greyyish blue
+- Connect 4 Grid - dark greyish blue
 - Background - dark live gradient
 - Blue & white colour to represent the 2 players
 
 #### Theme Colourblind (Optional)
 
-- Connect 4 Grid - Blue
-- Background - light live gradient
-- Red & yellow colour to represent the 2 players
+- Connect 4 Grid - warm dark blue
+- Background - light live gradient (Only Tan and Turquoise)
+- Blue & orangish yellow colour to represent the 2 players
 
 ### Settings Menu
 

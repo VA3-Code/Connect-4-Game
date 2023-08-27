@@ -7,10 +7,14 @@ pygame.init()
 # Create screen
 screen = pygame.display.set_mode((960, 540), pygame.RESIZABLE)
 
-while True:
+# Game Loop
+running = True
+
+while running:
     for evnt in pygame.event.get():
         if evnt.type == pygame.QUIT:
-            pygame.quit()
-            exit()
+            running = False
 
     pygame.display.update()
+
+pygame.quit()
