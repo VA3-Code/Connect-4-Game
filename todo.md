@@ -63,3 +63,49 @@
 - Basic AI
 - Physics of droppping pieces
 - Easter Egg
+
+## Check Win Function:-
+
+### Straight (Single column)
+
+- Check downwards
+- Min row: 0 and Max row: 2
+- incrementing row
+
+### Right (Single row)
+
+- Check right
+- Min column: 0 and Max column: 3
+- incrementing column
+
+### Left (Single row)
+
+- Check left
+- Min column: 3 and Max column: 6
+- decrementing column
+
+### Diagonals
+
+#### TL to BR
+
+- By incrementing col and row
+- min column: 0 and max column: 3
+- min row: 0 and max row: 2
+
+#### BL to TR
+
+- By incrementing col and decrementing row
+- min column: 0 and max column: 3
+- min row: 3 and max row: 5
+
+#### TR to BL
+
+- By decrementing col and incrementing row
+- min column: 3 and max column: 6
+- min row: 0 and max row: 2
+
+#### BR to TL
+
+- By decrementing col and row
+- min column: 3 and max column: 6
+- min row: 3 and max row: 5
