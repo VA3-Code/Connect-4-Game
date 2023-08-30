@@ -1,15 +1,15 @@
-import numpy as np
+from numpy import zeros, ndarray
 
 ROW_COUNT = 6
 COLUMN_COUNT = 7
 
 
 def create_board():
-    board = np.zeros((6, 7))
+    board = zeros((6, 7))
     return board
 
 
-def input_column(board, turn: bool):
+def input_column(board: ndarray, turn: bool):
     while True:
         col = int(
             input(f"Player {1 if turn else 2}: Enter the column between 1 and 7: ")
@@ -28,7 +28,7 @@ def input_column(board, turn: bool):
         return col
 
 
-def drop_piece(board, col: int, turn: bool):
+def drop_piece(board: ndarray, col: int, turn: bool):
     for row in range(ROW_COUNT - 1, -1, -1):
         if board[row][col] == 0:
             board[row][col] = 1 if turn else 2
@@ -37,18 +37,26 @@ def drop_piece(board, col: int, turn: bool):
     return row
 
 
-def check_win(board, row: int, col: int, turn: bool):
+def check_win(board: ndarray, row: int, col: int, turn: bool):
     win_play = 1 if turn else 2
 
-    # Single Row (Left): C <= 3
-    if col >= 3:
-        pass
-
     # Single Row (Right): C >= 3
-    if col <= 3:
-        pass
+    if col >= COLUMN_COUNT // 2:
+        for i in range(1, 4):
+            if board[row][col - i] != win_play:
+                break
+        else:
+            return True, win_play
 
-    if row <= 2:
+    # Single Row (Left): C <= 3
+    if col <= COLUMN_COUNT // 2:
+        for i in range(1, 4):
+            if board[row][col + i] != win_play:
+                break
+        else:
+            return True, win_play
+
+    if row < ROW_COUNT // 2:
         # Single Column: R <= 2
         for i in range(1, 4):
             if board[row + i][col] != win_play:
@@ -57,32 +65,55 @@ def check_win(board, row: int, col: int, turn: bool):
             return True, win_play
 
         # TL to BR: C <= 3 & R <= 2
-        if col <= 3:
-            pass
+        if col <= COLUMN_COUNT // 2:
+            for i in range(1, 4):
+                if board[row + i][col + i] != win_play:
+                    break
+            else:
+                return True, win_play
 
         # TR to BL: C >= 3 & R <= 2
-        if col >= 3:
-            pass
+        if col >= COLUMN_COUNT // 2:
+            for i in range(1, 4):
+                if board[row + i][col - i] != win_play:
+                    break
+            else:
+                return True, win_play
     else:
         # BL to TR: C <= 3 & R >= 3
-        if col <= 3:
-            pass
+        if col <= COLUMN_COUNT // 2:
+            for i in range(1, 4):
+                if board[row - i][col + i] != win_play:
+                    break
+            else:
+                return True, win_play
 
         # BR to TL: C >= 3 & R >= 3
-        if col >= 3:
-            pass
+        if col >= COLUMN_COUNT // 2:
+            for i in range(1, 4):
+                if board[row - i][col - i] != win_play:
+                    break
+            else:
+                return True, win_play
 
-    return False, win_play
+    return False, None
 
 
-game_over = False
-ct = 0
 board = create_board()
-turn = True
 
+turn, game_over = True, False
 winner = None
 
 while not game_over:
+    print(board)
+
+    for num in board[0]:
+        if num == 0:
+            break
+    else:
+        game_over = True
+        break
+
     column = input_column(board, turn)
 
     row = drop_piece(board, column, turn)
@@ -91,11 +122,8 @@ while not game_over:
 
     turn = not turn
 
-    print(board, row, column, game_over, winner)
 
-    if ct == 10:
-        game_over = True
-
-    ct += 1
-
-print(f"Player {winner} wins!")
+if winner:
+    print(f"Player {winner} wins!")
+else:
+    print("Tie game")
